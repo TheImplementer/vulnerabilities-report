@@ -5,21 +5,31 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Docker Image Vulnerability Checker</title>
     <style>
+        /* General styling for the entire page */
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
             background-color: #f9f9f9;
             color: #333;
         }
+        /* Styling for the header */
         h1 {
             text-align: center;
             color: #0056b3;
         }
+        /* Form styling to align input and button */
         form {
             display: flex;
             justify-content: center;
+            align-items: center;
             margin-bottom: 20px;
         }
+        /* Label styling to align with input */
+        label {
+            padding: 10px;
+            font-size: 16px;
+        }
+        /* Input field styling */
         input {
             padding: 10px;
             font-size: 16px;
@@ -27,6 +37,7 @@
             border-radius: 4px;
             width: 300px;
         }
+        /* Button styling */
         button {
             padding: 10px 20px;
             font-size: 16px;
@@ -37,9 +48,11 @@
             border: none;
             border-radius: 4px;
         }
+        /* Button hover effect */
         button:hover {
             background-color: #003d80;
         }
+        /* Table layout styling */
         table {
             margin: 0 auto;
             margin-top: 20px;
@@ -48,37 +61,45 @@
             background-color: white;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
+        /* Styling for table borders */
         table, th, td {
             border: 1px solid #ddd;
         }
+        /* Table header styling */
         th {
             background-color: #0056b3;
             color: white;
             padding: 12px;
             text-align: center;
         }
+        /* Table cell styling */
         td {
             padding: 10px;
             text-align: center;
         }
+        /* Alternating row colors for better readability */
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        /* Critical severity styling */
         .severity-critical {
             background-color: #ff6666;
             color: #990000;
             font-weight: bold;
         }
+        /* High severity styling */
         .severity-high {
             background-color: #ffcccc;
             color: #990000;
             font-weight: bold;
         }
+        /* Medium severity styling */
         .severity-medium {
             background-color: #fff2cc;
             color: #996600;
             font-weight: bold;
         }
+        /* Low severity styling */
         .severity-low {
             background-color: #ccffcc;
             color: #006600;
@@ -88,6 +109,7 @@
 </head>
 <body>
     <h1>Docker Image Vulnerability Checker</h1>
+    <!-- Form to input Docker image name -->
     <form id="vulnerability-form" method="POST">
         <label for="image">Enter Docker Image Name:</label>
         <input type="text" id="image" name="image" required>
@@ -110,11 +132,17 @@
             <tbody>
                 {% for vuln in vulnerabilities %}
                 <tr>
+                    <!-- Display Issue ID -->
                     <td>{{ vuln.issue_id }}</td>
+                    <!-- Display CVEs as a comma-separated list -->
                     <td>{{ ", ".join(vuln.cves) }}</td>
+                    <!-- Apply dynamic styling based on severity -->
                     <td class="severity-{{ vuln.severity | lower }}">{{ vuln.severity }}</td>
+                    <!-- Display summary of the vulnerability -->
                     <td>{{ vuln.summary }}</td>
+                    <!-- Display detailed description of the vulnerability -->
                     <td>{{ vuln.description }}</td>
+                    <!-- Display impact paths as a comma-separated list -->
                     <td>{{ ", ".join(vuln.impact_path) }}</td>
                 </tr>
                 {% endfor %}
