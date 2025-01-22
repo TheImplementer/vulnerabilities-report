@@ -105,6 +105,14 @@
             color: #006600;
             font-weight: bold;
         }
+        /* Image name display styling */
+        .image-name {
+            margin: 20px auto;
+            text-align: center;
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
     </style>
 </head>
 <body>
@@ -115,6 +123,13 @@
         <input type="text" id="image" name="image" required>
         <button type="submit">Check</button>
     </form>
+
+    <!-- Display the image name submitted -->
+    {% if image_name %}
+    <div class="image-name">
+        Vulnerabilities for Image: <span>{{ image_name }}</span>
+    </div>
+    {% endif %}
 
     <div id="result">
         {% if vulnerabilities %}
