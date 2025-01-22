@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Docker Image Vulnerability Checker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input {
+            padding: 10px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+        table {
+            margin-top: 20px;
+            border-collapse: collapse;
+            width: 100%;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Docker Image Vulnerability Checker</h1>
+    <form id="vulnerability-form" method="POST">
+        <label for="image">Enter Docker Image Name:</label>
+        <input type="text" id="image" name="image" required>
+        <button type="submit">Check</button>
+    </form>
+
+    <div id="result">
+        {% if vulnerabilities %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Issue ID</th>
+                    <th>Summary</th>
+                    <th>Description</th>
+                    <th>Severity</th>
+                    <th>CVEs</th>
+                    <th>Impact Path</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vuln in vulnerabilities %}
+                <tr>
+                    <td>{{ vuln.issue_id }}</td>
+                    <td>{{ vuln.summary }}</td>
+                    <td>{{ vuln.description }}</td>
+                    <td>{{ vuln.severity }}</td>
+                    <td>{{ ", ".join(vuln.cves) }}</td>
+                    <td>{{ ", ".join(vuln.impact_path) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>
