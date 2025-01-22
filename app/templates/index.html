@@ -64,6 +64,21 @@
         tr:nth-child(even) {
             background-color: #f2f2f2;
         }
+        .severity-high {
+            background-color: #ffcccc;
+            color: #990000;
+            font-weight: bold;
+        }
+        .severity-medium {
+            background-color: #fff2cc;
+            color: #996600;
+            font-weight: bold;
+        }
+        .severity-low {
+            background-color: #ccffcc;
+            color: #006600;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -92,7 +107,7 @@
                 <tr>
                     <td>{{ vuln.issue_id }}</td>
                     <td>{{ ", ".join(vuln.cves) }}</td>
-                    <td>{{ vuln.severity }}</td>
+                    <td class="severity-{{ vuln.severity | lower }}">{{ vuln.severity }}</td>
                     <td>{{ vuln.summary }}</td>
                     <td>{{ vuln.description }}</td>
                     <td>{{ ", ".join(vuln.impact_path) }}</td>
